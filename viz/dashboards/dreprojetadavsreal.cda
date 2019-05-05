@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CDADescriptor>
+   <DataSources>
+      <Connection id="MDX_UN" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+      <Connection id="MDX_PRODUTO" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+      <Connection id="MDX_ANO" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+      <Connection id="MDX_CAPITAL_INTERIOR" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+      <Connection id="MDX_TOCHART_VARIACAOMENSAL" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+      <Connection id="MDX_TOCHART_DRENIVEL03" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+      <Connection id="MDX_TOCHART_DRENIVEL02" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+      <Connection id="MDX_TOCHART_DRENIVEL01" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+      <Connection id="MDX_TOCHART_RECEITAS" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+      <Connection id="MDX_TOCHART_RECEITASPORTIPO" type="mondrian.jndi">
+         <Catalog>mondrian:/BI+ORCAMENTO</Catalog>
+         <Jndi>dwvertica</Jndi>
+      </Connection>
+   </DataSources>
+   <DataAccess access="public" connection="MDX_UN" id="MDX_UN" type="mdx">
+      <BandedMode>compact</BandedMode>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Output indexes="1,0" mode="include"/>
+      <Parameters>
+         <Parameter default="PRM_CAPITAL_INTERIOR" name="PRM_CAPITAL_INTERIOR" type="String"/>
+      </Parameters>
+      <Query><![CDATA[WITH
+MEMBER [Measures].[FILTRO] AS
+[DIM_CEC_CENTRO_CUSTO].CurrentMember.UniqueName
+SELECT [Measures].[FILTRO] ON 0,
+{ [DIM_CEC_CENTRO_CUSTO].[Todos],
+    FILTER(
+        Descendants(${PRM_CAPITAL_INTERIOR}, [DIM_CEC_CENTRO_CUSTO].[cec_dsc_centro_custo_nivel_03] )
+        , [Measures].[dsc_vlr_saldo]*[Measures].[dsc_vlr_saldo] > 0
+    )  
+}ON 1
+FROM [FAT_DRE_PROJETADA]]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="MDX_PRODUTO" id="MDX_PRODUTO" type="mdx">
+      <BandedMode>compact</BandedMode>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Output indexes="1,2" mode="include"/>
+      <Parameters/>
+      <Query><![CDATA[WITH
+MEMBER [Measures].[FILTRO] AS
+[DIM_TPR_TIPO_PRODUTO].CurrentMember.UniqueName
+MEMBER [Measures].[FILTRO2] AS
+[DIM_TPR_TIPO_PRODUTO].CurrentMember.Caption
+SELECT { [Measures].[FILTRO], [Measures].[FILTRO2] }ON 0,
+{ 
+    [DIM_TPR_TIPO_PRODUTO].[Todos],
+    FILTER(
+        {[DIM_TPR_TIPO_PRODUTO].[tpr_dsc_tipo_produto].Members}
+        , [Measures].[dsc_vlr_saldo]*[Measures].[dsc_vlr_saldo] > 0
+    )  
+}ON 1
+FROM [FAT_DRE_PROJETADA]]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="MDX_ANO" id="MDX_ANO" type="mdx">
+      <BandedMode>compact</BandedMode>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Output indexes="1,0" mode="include"/>
+      <Parameters/>
+      <Query><![CDATA[WITH
+MEMBER [Measures].[FILTRO] AS
+[DIM_TEM_TEMPO].CurrentMember.UniqueName
+SELECT [Measures].[FILTRO] ON 0,
+{ 
+    [DIM_TEM_TEMPO].[Todos],
+    FILTER(
+        {[DIM_TEM_TEMPO].[Ano].Members}
+        , [Measures].[dsc_vlr_saldo]*[Measures].[dsc_vlr_saldo] > 0
+    )  
+}ON 1
+FROM [FAT_DRE_PROJETADA]]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="MDX_CAPITAL_INTERIOR" id="MDX_CAPITAL_INTERIOR"
+               type="mdx">
+      <BandedMode>compact</BandedMode>
+      <Cache duration="3600" enabled="true"/>
+      <Columns/>
+      <Output indexes="1,0" mode="include"/>
+      <Parameters/>
+      <Query><![CDATA[WITH
+MEMBER [Measures].[FILTRO] AS
+[DIM_CEC_CENTRO_CUSTO].CurrentMember.UniqueName
+SELECT [Measures].[FILTRO] ON 0,
+{ 
+    [DIM_CEC_CENTRO_CUSTO].[Todos],
+    FILTER(
+        {[DIM_CEC_CENTRO_CUSTO].[cec_dsc_centro_custo_nivel_02].Members}
+        , [Measures].[dsc_vlr_saldo]*[Measures].[dsc_vlr_saldo] > 0
+    )  
+}ON 1
+FROM [FAT_DRE_PROJETADA]]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="MDX_TOCHART_VARIACAOMENSAL"
+               id="MDX_TOCHART_VARIACAOMENSAL"
+               type="mdx">
+      <BandedMode>compact</BandedMode>
+      <Cache duration="3600" enabled="false"/>
+      <Columns>
+         <Column idx="0">
+            <Name>Competencia</Name>
+         </Column>
+         <Column idx="1">
+            <Name>R$ Saldo Acumulado</Name>
+         </Column>
+         <Column idx="2">
+            <Name>R$ Meta Acumulada</Name>
+         </Column>
+         <Column idx="3">
+            <Name>Var%</Name>
+         </Column>
+      </Columns>
+      <Parameters>
+         <Parameter default="PRM_ANO" name="PRM_ANO" type="String"/>
+         <Parameter default="PRM_CENTRO_CUSTO" name="PRM_CENTRO_CUSTO" type="String"/>
+         <Parameter default="PRM_PRODUTO" name="PRM_PRODUTO" type="String"/>
+      </Parameters>
+      <Query><![CDATA[WITH
+SET [~ROWS] AS
+    Descendants(${PRM_ANO}, [DIM_TEM_TEMPO].[AnoMes])
+SELECT
+NON EMPTY {[Measures].[spr_vlr_saldo_acumulado], [Measures].[spr_vlr_meta_acumulado], [Measures].[spr_var_saldo_acumulado2]} ON COLUMNS,
+NON EMPTY [~ROWS] ON ROWS
+FROM [FAT_DRE_PROJETADA]
+WHERE ${PRM_CENTRO_CUSTO} * ${PRM_PRODUTO}]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="MDX_TOCHART_DRENIVEL03" id="MDX_TOCHART_DRENIVEL03"
+               type="mdx">
+      <BandedMode>compact</BandedMode>
+      <Cache duration="3600" enabled="false"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="PRM_ANO" name="PRM_ANO" type="String"/>
+         <Parameter default="PRM_CENTRO_CUSTO" name="PRM_CENTRO_CUSTO" type="String"/>
+         <Parameter default="PRM_PRODUTO" name="PRM_PRODUTO" type="String"/>
+         <Parameter default="PRM_DRE_NVL02" name="PRM_DRE_NVL02" type="String"/>
+      </Parameters>
+      <Query><![CDATA[WITH
+    SET [~ROWS] AS
+      descendants(
+        ${PRM_DRE_NVL02},
+        [DIM_EGC_ESTRUTURA_GRUPO_CONTAS].[egc_dsc_grupo_nivel_03]
+      )   
+SELECT
+NON EMPTY {
+  [Measures].[dsc_vlr_saldo], 
+  [Measures].[spr_vlr_meta],  
+  [Measures].[spr_vlr_variacao_percentual], 
+  [Measures].[spr_vlr_variacao_periodo]
+} ON COLUMNS,
+NON EMPTY [~ROWS] ON ROWS
+FROM [FAT_DRE_PROJETADA]
+WHERE ${PRM_CENTRO_CUSTO} * ${PRM_PRODUTO} * ${PRM_ANO}]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="MDX_TOCHART_DRENIVEL02" id="MDX_TOCHART_DRENIVEL02"
+               type="mdx">
+      <BandedMode>compact</BandedMode>
+      <Cache duration="3600" enabled="false"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="PRM_ANO" name="PRM_ANO" type="String"/>
+         <Parameter default="PRM_CENTRO_CUSTO" name="PRM_CENTRO_CUSTO" type="String"/>
+         <Parameter default="PRM_PRODUTO" name="PRM_PRODUTO" type="String"/>
+         <Parameter default="PRM_DRE_NVL01" name="PRM_DRE_NVL01" type="String"/>
+      </Parameters>
+      <Query><![CDATA[WITH
+    SET [~ROWS] AS
+      descendants(
+        ${PRM_DRE_NVL01},
+        [DIM_EGC_ESTRUTURA_GRUPO_CONTAS].[egc_dsc_grupo_nivel_02]
+      )   
+SELECT
+NON EMPTY {
+  [Measures].[dsc_vlr_saldo], 
+  [Measures].[spr_vlr_meta],  
+  [Measures].[spr_vlr_variacao_percentual], 
+  [Measures].[spr_vlr_variacao_periodo]
+} ON COLUMNS,
+NON EMPTY [~ROWS] ON ROWS
+FROM [FAT_DRE_PROJETADA]
+WHERE ${PRM_CENTRO_CUSTO} * ${PRM_PRODUTO} * ${PRM_ANO}]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="MDX_TOCHART_DRENIVEL01" id="MDX_TOCHART_DRENIVEL01"
+               type="mdx">
+      <BandedMode>compact</BandedMode>
+      <Cache duration="3600" enabled="false"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="PRM_ANO" name="PRM_ANO" type="String"/>
+         <Parameter default="PRM_CENTRO_CUSTO" name="PRM_CENTRO_CUSTO" type="String"/>
+         <Parameter default="PRM_PRODUTO" name="PRM_PRODUTO" type="String"/>
+      </Parameters>
+      <Query><![CDATA[WITH
+SET [~ROWS] AS
+    {[DIM_EGC_ESTRUTURA_GRUPO_CONTAS].[egc_dsc_grupo_nivel_01].Members}
+SELECT
+NON EMPTY {[Measures].[dsc_vlr_saldo], [Measures].[spr_vlr_meta],  [Measures].[spr_vlr_variacao_percentual], [Measures].[spr_vlr_variacao_periodo]} ON COLUMNS,
+NON EMPTY [~ROWS] ON ROWS
+FROM [FAT_DRE_PROJETADA]
+WHERE ${PRM_CENTRO_CUSTO} * ${PRM_PRODUTO} * ${PRM_ANO}]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="MDX_TOCHART_RECEITAS" id="MDX_TOCHART_RECEITAS"
+               type="mdx">
+      <BandedMode>compact</BandedMode>
+      <Cache duration="3600" enabled="false"/>
+      <Columns/>
+      <Parameters>
+         <Parameter default="PRM_ANO" name="PRM_ANO" type="String"/>
+         <Parameter default="PRM_CENTRO_CUSTO" name="PRM_CENTRO_CUSTO" type="String"/>
+         <Parameter default="PRM_PRODUTO" name="PRM_PRODUTO" type="String"/>
+      </Parameters>
+      <Query><![CDATA[WITH
+SET [~ROWS] AS
+ [DIM_EGC_ESTRUTURA_GRUPO_CONTAS].[013].[RECEITAS OPERACIONAIS].[RECEITAS OPERACIONAIS].Children
+SELECT
+NON EMPTY {[Measures].[dsc_vlr_saldo]} ON COLUMNS,
+NON EMPTY [~ROWS] ON ROWS
+FROM [FAT_DRE_PROJETADA]
+WHERE  ${PRM_CENTRO_CUSTO} * ${PRM_PRODUTO} * ${PRM_ANO}]]></Query>
+   </DataAccess>
+   <DataAccess access="public" connection="MDX_TOCHART_RECEITASPORTIPO"
+               id="MDX_TOCHART_RECEITASPORTIPO"
+               type="mdx">
+      <BandedMode>classic</BandedMode>
+      <Cache duration="3600" enabled="false"/>
+      <Columns>
+         <Column idx="4">
+            <Name>Nivel 1</Name>
+         </Column>
+         <Column idx="6">
+            <Name>Nivel 2</Name>
+         </Column>
+         <Column idx="7">
+            <Name>Valor</Name>
+         </Column>
+      </Columns>
+      <Output indexes="4,6,7" mode="include"/>
+      <Parameters>
+         <Parameter default="PRM_ANO" name="PRM_ANO" type="String"/>
+         <Parameter default="PRM_CENTRO_CUSTO" name="PRM_CENTRO_CUSTO" type="String"/>
+         <Parameter default="PRM_PRODUTO" name="PRM_PRODUTO" type="String"/>
+      </Parameters>
+      <Query><![CDATA[WITH
+SET [~DIM_EGC_ESTRUTURA_GRUPO_CONTAS_DIM_EGC_ESTRUTURA_GRUPO_CONTAS_egc_dsc_grupo_nivel_01] AS
+    {[DIM_EGC_ESTRUTURA_GRUPO_CONTAS].[013].[RECEITAS OPERACIONAIS]}
+SET [~DIM_EGC_ESTRUTURA_GRUPO_CONTAS_DIM_EGC_ESTRUTURA_GRUPO_CONTAS_egc_dsc_grupo_nivel_04] AS
+    Exists({[DIM_EGC_ESTRUTURA_GRUPO_CONTAS].[egc_dsc_grupo_nivel_04].Members}, [~DIM_EGC_ESTRUTURA_GRUPO_CONTAS_DIM_EGC_ESTRUTURA_GRUPO_CONTAS_egc_dsc_grupo_nivel_01])
+SET [~DIM_EGC_ESTRUTURA_GRUPO_CONTAS_DIM_EGC_ESTRUTURA_GRUPO_CONTAS_egc_dsc_grupo_nivel_05] AS
+    Exists({[DIM_EGC_ESTRUTURA_GRUPO_CONTAS].[egc_dsc_grupo_nivel_05].Members}, [~DIM_EGC_ESTRUTURA_GRUPO_CONTAS_DIM_EGC_ESTRUTURA_GRUPO_CONTAS_egc_dsc_grupo_nivel_04])
+SET [~ROWS] AS
+    Hierarchize({[~DIM_EGC_ESTRUTURA_GRUPO_CONTAS_DIM_EGC_ESTRUTURA_GRUPO_CONTAS_egc_dsc_grupo_nivel_01], [~DIM_EGC_ESTRUTURA_GRUPO_CONTAS_DIM_EGC_ESTRUTURA_GRUPO_CONTAS_egc_dsc_grupo_nivel_04], [~DIM_EGC_ESTRUTURA_GRUPO_CONTAS_DIM_EGC_ESTRUTURA_GRUPO_CONTAS_egc_dsc_grupo_nivel_05]})
+SELECT
+NON EMPTY {[Measures].[dsc_vlr_saldo]} ON COLUMNS,
+NON EMPTY [~ROWS] ON ROWS
+FROM [FAT_DRE_PROJETADA]
+WHERE  ${PRM_CENTRO_CUSTO}* ${PRM_PRODUTO} * ${PRM_ANO}]]></Query>
+   </DataAccess>
+</CDADescriptor>

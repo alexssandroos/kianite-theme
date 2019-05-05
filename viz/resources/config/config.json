@@ -1,0 +1,22 @@
+{
+	"app":{
+		"pg_ip" : "172.25.131.68",
+		"pg_db" : "dwdes",
+ 		"pg_user" : "etl",
+		"pg_pwd" : "etl",
+		"pg_port" : "5432",
+		"vertica_ip" : "172.25.131.93",
+		"vertica_db" : "dw_vertica",
+ 		"vertica_user" : "dbadmin",
+		"vertica_pwd" : "dw_vertica",
+		"vertica_port" : "5433",
+		"prod_mode": "true",
+		"app_email_sender" : "noreply@cagece.com.br",
+		"app_email_smtp" : "172.25.131.80",
+		"app_email_port" : "587",
+		"app_email_pwd" : "IDSx6YYS996T1g8oRDDJ",
+		"app_email_name" : "SEI - NOTIFICAÇÕES",
+		"app_bot_api":"573250402:AAE8E1bClPp1uB5S-D86h-PeMBNYLcHI0qo",
+		"app_grp_sei_processos" :"-1001152810615"
+	}
+}

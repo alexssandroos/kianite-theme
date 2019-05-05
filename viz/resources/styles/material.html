@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>SEI Viz</title>
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <!--link href="/pentaho-style/dashboard.css" rel="stylesheet" type="text/css" media="screen" /-->
+        @HEADER@
+        <link rel="stylesheet" type="text/css" href="../../../api/repos/validaDM/static/custom/css/material.min.css" />
+				<link rel="stylesheet" type="text/css" href="../../../api/repos/validaDM/static/custom/css/iconsMaterial.css" />
+        <!--link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" -->
+    </head>
+    <body>
+
+				<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+			  <header class="mdl-layout__header">
+			    <div class="mdl-layout__header-row">
+			      <!-- Title -->
+			      <span class="mdl-layout-title">SEI Viz</span>
+			      <!-- Add spacer, to align navigation to the right -->
+			      <div class="mdl-layout-spacer"></div>
+			      <!-- Navigation. We hide it in small screens. -->
+			      <nav class="mdl-navigation mdl-layout--large-screen-only">
+			        <a id="auser" class="mdl-navigation__link" href="main"></a>
+          			<a class="mdl-navigation__link" href="../../../Logout"><i class="material-icons">power_settings_new</i>  Sair</a>
+			      </nav>
+			    </div>
+			  </header>
+			  <div class="mdl-layout__drawer">
+			    <span class="mdl-layout-title">SEI Viz</span>
+			    <nav class="mdl-navigation">
+							<a class="mdl-navigation__link" href="main"><i class="material-icons">home</i>  Home</a>
+			        <!--<a class="mdl-navigation__link" href="validacao"><i class="material-icons">priority_high</i>  Validação</a>
+			        <a class="mdl-navigation__link" href="liberacao"><i class="material-icons">check</i>  Liberação</a>
+							<a class="mdl-navigation__link" href="reprocessamento"><i class="material-icons">refresh</i>  Solicita reprocessamento</a>
+							<a class="mdl-navigation__link" href="aprovareprocesso"><i class="material-icons">check</i>  Aprova Reprocesso</a>-->
+			        <!--<a class="mdl-navigation__link" href="olap"><i class="material-icons">timeline</i>  Olap</a> -->
+			        <a class="mdl-navigation__link" href="../../../Logout"><i class="material-icons">power_settings_new</i>  Sair</a>
+			    </nav>
+			  </div>
+			  <main class="mdl-layout__content">
+			    <div class="page-content">@CONTENT@</div>
+			  </main>
+			</div>
+
+    <script src="../../../api/repos/validaDM/static/custom/js/material.js"></script>
+    <script  type="text/javascript">
+    	document.getElementById("auser").innerHTML = '<i class="material-icons">people</i>'+'  '+ Dashboards.context.user;
+    </script>
+    </body>
+</html>

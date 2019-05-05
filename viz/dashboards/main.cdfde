@@ -1,0 +1,194 @@
+{
+ "components": {
+  "rows": []
+ },
+ "datasources": {
+  "rows": []
+ },
+ "filename": "/system/viz/dashboards/main.cdfde",
+ "layout": {
+  "rows": [
+   {
+    "id": "07c71575-c7d5-d67f-cfb3-bd29407bb062",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "app",
+      "type": "Id"
+     },
+     {
+      "name": "resourceFile",
+      "value": "${system:../static/custom/js/app.js}",
+      "type": "ResourceFile"
+     },
+     {
+      "name": "resourceType",
+      "value": "Javascript",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "6187eb77-0a85-0f2c-d4f3-f4e34833fe34",
+    "type": "LayoutResourceFile",
+    "typeDesc": "Resource",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "theme_meteria",
+      "type": "Id"
+     },
+     {
+      "name": "resourceFile",
+      "value": "${system:../static/custom/css/materia.min.css}",
+      "type": "ResourceFile"
+     },
+     {
+      "name": "resourceType",
+      "value": "Css",
+      "type": "Label"
+     }
+    ]
+   },
+   {
+    "id": "2a0fee8b-03c2-f4f0-a1e9-94b3f894a820",
+    "type": "LayoutRow",
+    "typeDesc": "Row",
+    "parent": "UnIqEiD",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "da5161af-c59f-2e42-88a9-491223920e23",
+    "type": "LayoutBootstrapColumn",
+    "typeDesc": "Column",
+    "parent": "2a0fee8b-03c2-f4f0-a1e9-94b3f894a820",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "bootstrapExtraSmall",
+      "value": "12",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapSmall",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapMedium",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapLarge",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "bootstrapCssClass",
+      "value": "",
+      "type": "String"
+     },
+     {
+      "name": "height",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "backgroundColor",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "roundCorners",
+      "value": "",
+      "type": "RoundCorners"
+     },
+     {
+      "name": "textAlign",
+      "value": "",
+      "type": "TextAlign"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   },
+   {
+    "id": "93956929-088f-aeb9-1368-683ad42078db",
+    "type": "LayoutHtml",
+    "typeDesc": "Html",
+    "parent": "da5161af-c59f-2e42-88a9-491223920e23",
+    "properties": [
+     {
+      "name": "name",
+      "value": "",
+      "type": "Id"
+     },
+     {
+      "name": "html",
+      "value": "<script src=\"/pentaho/plugin/pentaho-cdf-dd/api/resources/system/viz/static/custom/js/vue.js\"></script>\n<script src=\"/pentaho/plugin/pentaho-cdf-dd/api/resources/system/viz/static/custom/js/axios.js\"></script>\n\n<div id=\"app\">\n    <div class = row>\n\t\t<panel v-for=\"recurso in recursos\"\n\t\t\t:title = 'recurso[1]'\n\t\t     :message = 'recurso[2]'\n \t\t\t:icon = 'recurso[4]'\n            :rota = 'recurso[0]'\n            :tipo = 'recurso[6]'/>\n\t</div>\n</div>\n\n<script src=\"/pentaho/plugin/pentaho-cdf-dd/api/resources/system/viz/static/custom/js/components/panel.js\"> </script> \n\n<script> \nnew Vue({\n    \n  el: '#app',\n  \n  data(){\n      return {\n          recursos :[]\n      }},\n      \n   created(){\n       axios.get('/pentaho/plugin/viz/api/getresource').then( (res) => {this.recursos = res.data.resultset})\n   }\n  \n});\n</script> ",
+      "type": "Html"
+     },
+     {
+      "name": "fontSize",
+      "value": "",
+      "type": "Integer"
+     },
+     {
+      "name": "color",
+      "value": "",
+      "type": "Color"
+     },
+     {
+      "name": "cssClass",
+      "value": "",
+      "type": "String"
+     }
+    ]
+   }
+  ],
+  "title": "main"
+ }
+}
